@@ -15,11 +15,11 @@ public class Route {
 
     }
 
-    public String getCity1() {
+    public String getFirstCity() {
         return firstCity;
     }
 
-    public String getCity2() {
+    public String getSecondCity() {
         return secondCity;
     }
 
@@ -38,4 +38,5 @@ public class Route {
     public void setTime(int time) {
         this.time = time;
     }
+
 }

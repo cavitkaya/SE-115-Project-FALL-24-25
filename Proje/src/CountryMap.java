@@ -1,5 +1,5 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 
@@ -11,8 +11,9 @@ public class CountryMap {
     private City[] firstLastCity;
 
     public CountryMap() {
+        Scanner sc = null;
         try{
-            Scanner sc = new Scanner(new FileReader("map.txt"));
+            sc = new Scanner(Paths.get("map.txt"));
             this.cityCount = Integer.parseInt(sc.nextLine());
             String[] array = sc.nextLine().split(" ");
 
@@ -29,16 +30,20 @@ public class CountryMap {
                 tempArray = sc.nextLine().split(" ");
                 this.routes[i] = new Route();
                 this.routes[i].setFirstCity(tempArray[0]);
-                this.routes[i].setFirstCity(tempArray[1]);
-                this.routes[i].setFirstCity(tempArray[2]);
+                this.routes[i].setSecondCity(tempArray[1]);
+                this.routes[i].setTime(Integer.parseInt(tempArray[2]));
             }
             this.firstLastCity = new City[2];
             String[] tempArray = sc.nextLine().split(" ");
+            this.firstLastCity[0] = new City();
+            this.firstLastCity[1] = new City();
             this.firstLastCity[0].setCityLabel(tempArray[0]);
             this.firstLastCity[1].setCityLabel(tempArray[1]);
 
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+            sc.close();
         }
     }
 

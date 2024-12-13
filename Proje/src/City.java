@@ -16,4 +16,5 @@ public class City {
     public void setCityLabel(String label){
         cityLabel = label;
     }
+
 }

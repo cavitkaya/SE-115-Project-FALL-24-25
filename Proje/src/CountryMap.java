@@ -1,14 +1,61 @@
-public class CountryMap {
-    private int cityCount;
-    private String[] cities;
-    private String[][] cityDistances;
-    private String lastLine;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
 
-    public CountryMap(int cityCount, String[] cities, String[][] cityDistances, String lastLine) {
-        this.cityCount = cityCount;
+
+public class CountryMap {
+    private City[] cities ;
+    private Route[] routes ;
+    private int cityCount;
+    private int routeCount;
+    private City[] firstLastCity;
+
+    public CountryMap() {
+        try{
+            Scanner sc = new Scanner(new FileReader("dosya.txt"));
+            this.cityCount = Integer.parseInt(sc.nextLine());
+            String[] array = sc.nextLine().split(" ");
+
+            this.cities = new City[cityCount];
+            for(int i = 0;i < cityCount;i++){
+                this.cities[i] = new City();
+                this.cities[i].setCityLabel(array[i]);
+            }
+            this.routeCount = Integer.parseInt(sc.nextLine());
+            this.routes = new Route[routeCount];
+
+            for(int i = 0;i<routeCount;i++){
+                String[] tempArray = new String[3];
+                tempArray = sc.nextLine().split(" ");
+                this.routes[i] = new Route();
+                this.routes[i].setFirstCity(tempArray[0]);
+                this.routes[i].setFirstCity(tempArray[1]);
+                this.routes[i].setFirstCity(tempArray[2]);
+            }
+            this.firstLastCity = new City[2];
+            String[] tempArray = sc.nextLine().split(" ");
+            this.firstLastCity[0].setCityLabel(tempArray[0]);
+            this.firstLastCity[1].setCityLabel(tempArray[1]);
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public City[] getCities() {
+        return cities;
+    }
+
+    public void setCities(City[] cities) {
         this.cities = cities;
-        this.cityDistances = cityDistances;
-        this.lastLine = lastLine;
+    }
+
+    public Route[] getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(Route[] routes) {
+        this.routes = routes;
     }
 
     public int getCityCount() {
@@ -19,27 +66,22 @@ public class CountryMap {
         this.cityCount = cityCount;
     }
 
-    public String[] getCities() {
-        return cities;
+    public int getRouteCount() {
+        return routeCount;
     }
 
-    public void setCities(String[] cities) {
-        this.cities = cities;
+    public void setRouteCount(int routeCount) {
+        this.routeCount = routeCount;
     }
 
-    public String[][] getCityDistances() {
-        return cityDistances;
+    public City[] getFirstLastCity() {
+        return firstLastCity;
     }
 
-    public void setCityDistances(String[][] cityDistances) {
-        this.cityDistances = cityDistances;
+    public void setFirstLastCity(City[] firstLastCity) {
+        this.firstLastCity = firstLastCity;
     }
 
-    public String getLastLine() {
-        return lastLine;
-    }
 
-    public void setLastLine(String lastLine) {
-        this.lastLine = lastLine;
-    }
 }
+

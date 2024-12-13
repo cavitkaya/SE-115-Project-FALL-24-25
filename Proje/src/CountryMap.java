@@ -12,7 +12,7 @@ public class CountryMap {
 
     public CountryMap() {
         try{
-            Scanner sc = new Scanner(new FileReader("dosya.txt"));
+            Scanner sc = new Scanner(new FileReader("map.txt"));
             this.cityCount = Integer.parseInt(sc.nextLine());
             String[] array = sc.nextLine().split(" ");
 

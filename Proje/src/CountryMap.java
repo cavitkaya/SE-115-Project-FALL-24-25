@@ -10,41 +10,34 @@ public class CountryMap {
     private int routeCount;
     private City[] firstLastCity;
 
-    public CountryMap() {
-        Scanner sc = null;
-        try{
-            sc = new Scanner(Paths.get("map.txt"));
-            this.cityCount = Integer.parseInt(sc.nextLine());
-            String[] array = sc.nextLine().split(" ");
+    public CountryMap(Scanner sc) {
 
-            this.cities = new City[cityCount];
-            for(int i = 0;i < cityCount;i++){
-                this.cities[i] = new City();
-                this.cities[i].setCityLabel(array[i]);
-            }
-            this.routeCount = Integer.parseInt(sc.nextLine());
-            this.routes = new Route[routeCount];
+        this.cityCount = Integer.parseInt(sc.nextLine());
+        String[] array = sc.nextLine().split(" ");
 
-            for(int i = 0;i<routeCount;i++){
-                String[] tempArray = new String[3];
-                tempArray = sc.nextLine().split(" ");
-                this.routes[i] = new Route();
-                this.routes[i].setFirstCity(tempArray[0]);
-                this.routes[i].setSecondCity(tempArray[1]);
-                this.routes[i].setTime(Integer.parseInt(tempArray[2]));
-            }
-            this.firstLastCity = new City[2];
-            String[] tempArray = sc.nextLine().split(" ");
-            this.firstLastCity[0] = new City();
-            this.firstLastCity[1] = new City();
-            this.firstLastCity[0].setCityLabel(tempArray[0]);
-            this.firstLastCity[1].setCityLabel(tempArray[1]);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            sc.close();
+        this.cities = new City[cityCount];
+        for(int i = 0;i < cityCount;i++){
+            this.cities[i] = new City();
+            this.cities[i].setCityLabel(array[i]);
         }
+        this.routeCount = Integer.parseInt(sc.nextLine());
+        this.routes = new Route[routeCount];
+
+        for(int i = 0;i<routeCount;i++){
+            String[] tempArray = new String[3];
+            tempArray = sc.nextLine().split(" ");
+            this.routes[i] = new Route();
+            this.routes[i].setFirstCity(tempArray[0]);
+            this.routes[i].setSecondCity(tempArray[1]);
+            this.routes[i].setTime(Integer.parseInt(tempArray[2]));
+        }
+        this.firstLastCity = new City[2];
+        String[] tempArray = sc.nextLine().split(" ");
+        this.firstLastCity[0] = new City();
+        this.firstLastCity[1] = new City();
+        this.firstLastCity[0].setCityLabel(tempArray[0]);
+        this.firstLastCity[1].setCityLabel(tempArray[1]);
+
     }
 
     public City[] getCities() {
@@ -86,7 +79,6 @@ public class CountryMap {
     public void setFirstLastCity(City[] firstLastCity) {
         this.firstLastCity = firstLastCity;
     }
-
 
 }
 
